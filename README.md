@@ -9,8 +9,8 @@ To get started you need to execute the following commands from the terminal on y
 
 This will fetch the files:
 
-* wget https://github.com/Mynima/Ravencoin_Node_101/blob/2020-03-25_First_Attempt/01_Install_Raven_node.sh
-* wget https://github.com/Mynima/Ravencoin_Node_101/blob/2020-03-25_First_Attempt/02_Check_Status.sh
+* wget https://raw.githubusercontent.com/Mynima/Ravencoin_Node_RaspberryPi/master/01_Install_Raven_node.sh
+* wget https://raw.githubusercontent.com/Mynima/Ravencoin_Node_RaspberryPi/master/02_Check_Status.sh
 
 Then enter to make the files executable:
 * chmod +x ~/01_Install_Raven_node.sh

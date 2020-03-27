@@ -35,7 +35,7 @@ fi
 
 #If already installed Check if the process is running or not
 ############################################################
-new_install=1
+
 if (($new_install == 0)); then
     echo "Checking if process is already running."
     sleep 3

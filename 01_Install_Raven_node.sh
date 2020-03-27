@@ -42,7 +42,7 @@ if (($new_install == 0)); then
     if [[ $(ps -ef | grep -c ravend)  -ne 1 ]]; then
         echo "The Ravencoin Daemon is already running. No additional setup is required."
         sleep 3
-        if [ -a "/02_Check_Status.sh" ]; then
+        if [ -a "02_Check_Status.sh" ]; then
             echo "Here is the current status of your node:"
             ~/02_Check_Status.sh
             sleep 5

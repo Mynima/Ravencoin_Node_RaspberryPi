@@ -44,7 +44,10 @@ if (($new_install == 0)); then
         sleep 3
         if [ -a /02_Check_Status.sh ]; then
             echo "Here is the current status of your node:"
+            sleep 1
+            echo " "
             ~/02_Check_Status.sh
+            echo " "
             sleep 5
         else
             pid_num=$(pidof ravend)

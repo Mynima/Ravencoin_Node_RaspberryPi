@@ -14,7 +14,6 @@
 
 #Make sure Pi is up-to-date
 read -p "First thing we will do is update/upgrade your Raspberry Pi, do you wish to continue? (y/n) " update_yn
-echo "First thing we will do is update/upgrade"
 
 if [ $update_yn == "y" ]; then
     sudo apt-get update

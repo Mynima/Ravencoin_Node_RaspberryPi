@@ -92,7 +92,7 @@ else
         echo "Downloading files and extracting version $version_num."
         sleep 2
         cd ~/ 
-        wget https://github.com/RavenProject/Ravencoin/releases/download/v3.3.2/raven-$version_num-arm-linux-gnueabihf.tar.gz 
+        wget https://github.com/RavenProject/Ravencoin/releases/download/v$version_num/raven-$version_num-arm-linux-gnueabihf.tar.gz 
         tar -xvzf raven-$version_num-arm-linux-gnueabihf.tar.gz 
 
         echo "Assigning to local binary for access across users"

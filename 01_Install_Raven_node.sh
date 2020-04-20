@@ -93,11 +93,11 @@ else
         sleep 2
         cd ~/ 
         wget https://github.com/RavenProject/Ravencoin/releases/download/v$version_num/raven-$version_num.0-arm-linux-gnueabihf.tar.gz 
-        tar -xvzf raven-$version_num-arm-linux-gnueabihf.tar.gz 
+        tar -xvzf raven-$version_num.0-arm-linux-gnueabihf.tar.gz 
 
         echo "Assigning to local binary for access across users"
         sleep 2
-        sudo cp ./raven-$version_num/bin/* /usr/local/bin
+        sudo cp ./raven-$version_num.0/bin/* /usr/local/bin
     fi
 
     if [ $upgrade_node != "y" ]; then 

@@ -100,7 +100,7 @@ else
         sudo cp ./raven-$version_num/bin/* /usr/local/bin
     fi
 
-    if [ $upgrade_node != "y" ]
+    if [ $upgrade_node != "y" ]; then 
         #Download bootstrap, checking if they want to use default
         #########################################################
         bootstrap_check=404
@@ -322,20 +322,20 @@ EOM
         if [ $fail2_yn == "y" ]; then
             sudo fail2ban-client status
         fi
-    #Congratulations
-    ################
-    echo "  "
-    echo "  "
-    echo "  "
-    echo "CONGRATULATIONS!!! You are now up and running with your very own Ravencoin Node."
-    sleep 3
-    echo "Thank you for supporting the network!"
-    sleep 2
-    echo "  "
-    echo "  "
-    echo "  "
-    echo "If you installed the 02_Check_Status.sh file as well then you can now use this (by typing '~/02_Check_Status.sh') to check on the status of your blockchain."
-    sleep 5
+        #Congratulations
+        ################
+        echo "  "
+        echo "  "
+        echo "  "
+        echo "CONGRATULATIONS!!! You are now up and running with your very own Ravencoin Node."
+        sleep 3
+        echo "Thank you for supporting the network!"
+        sleep 2
+        echo "  "
+        echo "  "
+        echo "  "
+        echo "If you installed the 02_Check_Status.sh file as well then you can now use this (by typing '~/02_Check_Status.sh') to check on the status of your blockchain."
+        sleep 5
     else
         #Congratulations
         ################

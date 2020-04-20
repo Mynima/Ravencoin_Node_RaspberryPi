@@ -36,7 +36,7 @@ fi
 #If already installed Check if the process is running or not
 ############################################################
 
-if (($new_install == 0 and $upgrade_node != "y" )); then
+if (($new_install == 0 and "$upgrade_node" != "y" )); then
     echo "Checking if process is already running."
     sleep 3
     #Check if process is running and confirm current uptime

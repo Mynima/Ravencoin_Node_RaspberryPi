@@ -21,8 +21,7 @@ if [ $update_yn == "y" ]; then
 fi
 
 #Check the folder location to see if Daemon exists
-if [ -f /usr/local/bin/ravend ];
-then
+if [ -f /usr/local/bin/ravend ]; then
     echo "Ravencoin Daemon already installed."
     sleep 3
     new_install=0
@@ -36,7 +35,7 @@ fi
 #If already installed Check if the process is running or not
 ############################################################
 
-if (($new_install == 0 and "$upgrade_node" != "y" )); then
+if [ $new_install == 0 and "$upgrade_node" != "y" ]; then
     echo "Checking if process is already running."
     sleep 3
     #Check if process is running and confirm current uptime
@@ -80,7 +79,7 @@ else
     #Check the version exists and download
     ver_check=404
     while (($ver_check == 404)); do
-        read -p "Which version do you want to download? (example 3.3.2) " version_num
+        read -p "Which version do you want to download? (example 4.3.1) " version_num
         ver_check=$(curl -s --head -w %{http_code} https://github.com/RavenProject/Ravencoin/releases/download/v$version_num/raven-$version_num.0-arm-linux-gnueabihf.tar.gz -o /dev/null)
         if (($ver_check == 404)); then 
             echo "Version $version_num does not exist, please try again."
@@ -95,48 +94,49 @@ else
         wget https://github.com/RavenProject/Ravencoin/releases/download/v$version_num/raven-$version_num.0-arm-linux-gnueabihf.tar.gz 
         tar -xvzf raven-$version_num.0-arm-linux-gnueabihf.tar.gz 
 
-        echo "Assigning to local binary for access across users"
+        echo "Assigning to local binary for access across users and removing zip file"
         sleep 2
         sudo cp ./raven-$version_num.0/bin/* /usr/local/bin
+        sudo rm raven-$version_num.0-arm-linux-gnueabihf.tar.gz 
     fi
 
     if [ $upgrade_node != "y" ]; then 
         #Download bootstrap, checking if they want to use default
         #########################################################
-        bootstrap_check=404
+        #bootstrap_check=404
         
-        read -p "Do you want to use the default bootstrap from 2019? (y/n) " boot_yn
+        #read -p "Do you want to use the default bootstrap from 2019? (y/n) " boot_yn
 
-        if [ $boot_yn == "y" ]; then
-            echo "Great, let's download the Ravenland file. This may take some time."
-            wget http://bootstrap.ravenland.org/blockchain.tar.gz
-            tar -xvzf bootstrap.tar.gz 
-            rm bootstrap.tar.gz #deleting to save space 
-        else
-            while (( $bootstrap_check == 404 )); do
-                read -p "Please file please enter the download location, (only .tar.gz files with full http:// address will be accepted). " bootstrap_file
-                if [[ "$bootstrap_file" == *".tar.gz"* && "$bootstrap_file" == *"http://"* ]]; then
-                    #Check file exists.
-                    regex='^(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]\.[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]$'
-                    if [[ $bootstrap_file =~ $regex ]]; then
-                        echo "Excellent, downloading the file now. This may take some time."
-                        wget  $bootstrap_file
-                        bootstrap_file_zip=${bootstrap_file##*/}
-                        tar -xvzf $bootstrap_file_zip 
-                        rm $bootstrap_file_zip #deleting to save space
-                        bootstrap_check=200
-                    else
-                        echo "File doesn't seem to exist. Please try again."
-                        sleep 2
-                        bootstrap_check=404
-                    fi
-                else
-                    echo "Make sure to provide the full http:// address with relevant file extension '.tar.gz' and check that the file exists."
-                    bootstrap_check=404
-                    sleep 2
-                fi
-            done
-        fi
+        #if [ $boot_yn == "y" ]; then
+        #    echo "Great, let's download the Ravenland file. This may take some time."
+        #    wget http://bootstrap.ravenland.org/blockchain.tar.gz
+        #    tar -xvzf bootstrap.tar.gz 
+        #    rm bootstrap.tar.gz #deleting to save space 
+        #else
+        #    while (( $bootstrap_check == 404 )); do
+        #        read -p "Please file please enter the download location, (only .tar.gz files with full http:// address will be accepted). " bootstrap_file
+        #        if [[ "$bootstrap_file" == *".tar.gz"* && "$bootstrap_file" == *"http://"* ]]; then
+        #            #Check file exists.
+        #            regex='^(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]\.[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]$'
+        #            if [[ $bootstrap_file =~ $regex ]]; then
+        #                echo "Excellent, downloading the file now. This may take some time."
+        #                wget  $bootstrap_file
+        #                bootstrap_file_zip=${bootstrap_file##*/}
+        #                tar -xvzf $bootstrap_file_zip 
+        #                rm $bootstrap_file_zip #deleting to save space
+        #                bootstrap_check=200
+        #            else
+        #                echo "File doesn't seem to exist. Please try again."
+        #                sleep 2
+        #                bootstrap_check=404
+        #            fi
+        #        else
+        #            echo "Make sure to provide the full http:// address with relevant file extension '.tar.gz' and check that the file exists."
+        #            bootstrap_check=404
+        #            sleep 2
+        #        fi
+        #    done
+        #fi
 
         #Set up the config file
         #######################

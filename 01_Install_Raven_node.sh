@@ -35,7 +35,7 @@ fi
 #If already installed Check if the process is running or not
 ############################################################
 
-if [[ $new_install -eq 0 and "$upgrade_node" != "y" ]]; then
+if [ $new_install -eq 0 ] && [ "$upgrade_node" != "y" ]; then
     echo "Checking if process is already running."
     sleep 3
     #Check if process is running and confirm current uptime
@@ -61,8 +61,7 @@ if [[ $new_install -eq 0 and "$upgrade_node" != "y" ]]; then
     else
         read -p "Node is not running. Would you like to start the node? (y/n) " resp_yn
         if [ "$resp_yn" == "y" ]; then
-            echo "Great, starting now."
-            sleep 2
+            echo "Great, starting now. Please press ENTER to continue."
             ravend &
             echo "If you wish to close out then type 'raven-cli stop' into the terminal and hit ENTER."
         else

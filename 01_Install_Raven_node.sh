@@ -78,8 +78,8 @@ else
     #Check the version exists and download
     ver_check=404
     while (($ver_check == 404)); do
-        read -p "Which version do you want to download? (example 4.3.1) " version_num
-        ver_check=$(curl -s --head -w %{http_code} https://github.com/RavenProject/Ravencoin/releases/download/v$version_num/raven-$version_num.0-arm-linux-gnueabihf.tar.gz -o /dev/null)
+        read -p "Which version do you want to download? (example 4.3.2.1) " version_num
+        ver_check=$(curl -s --head -w %{http_code} https://github.com/RavenProject/Ravencoin/releases/download/v$version_num/raven-$version_num-arm32v7.zip -o /dev/null)
         if (($ver_check == 404)); then 
             echo "Version $version_num does not exist, please try again."
         fi
@@ -90,13 +90,16 @@ else
         echo "Downloading files and extracting version $version_num."
         sleep 2
         cd ~/ 
-        wget https://github.com/RavenProject/Ravencoin/releases/download/v$version_num/raven-$version_num.0-arm-linux-gnueabihf.tar.gz 
-        tar -xvzf raven-$version_num.0-arm-linux-gnueabihf.tar.gz 
+        wget https://github.com/RavenProject/Ravencoin/releases/download/v$version_num/raven-$version_num-arm32v7.zip
+        unzip raven-$version_num-arm32v7.zip
+        cd ~/arm32v7
+        tar -xvzf raven-$version_num-arm-linux-gnueabihf.tar.gz 
 
         echo "Assigning to local binary for access across users and removing zip file"
         sleep 2
-        sudo cp ./raven-$version_num.0/bin/* /usr/local/bin
-        sudo rm raven-$version_num.0-arm-linux-gnueabihf.tar.gz 
+        sudo cp ./raven-$version_num/bin/* /usr/local/bin
+        cd ~/
+        sudo rm raven-$version_num-arm32v7.zip
     fi
 
     if [ $upgrade_node != "y" ]; then 
